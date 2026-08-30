@@ -842,30 +842,42 @@
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-  // 固定バナー（ヘッダー）の要素を取得
+document.addEventListener('DOMContentLoaded', () => {
   const header = document.querySelector('.fixed-banner') || document.querySelector('header');
   if (!header) return;
 
-  // まだスマホ用ボタンが存在しない場合のみ、動的に作成して追加する
-  if (!document.getElementById('safeMenuBtn')) {
-    const btn = document.createElement('button');
-    btn.id = 'safeMenuBtn';
-    btn.className = 'safe-menu-btn';
-    btn.innerHTML = 'MENU ☰';
-    header.appendChild(btn);
+  // 1. 元々HTMLにある「メニュー」ボタンを探す（テキストに「メニュー」が含まれるボタン、または特定のボタン）
+  let targetBtn = null;
+  const buttons = header.querySelectorAll('button');
+  for (let btn of buttons) {
+    if (btn.textContent.includes('メニュー')) {
+      targetBtn = btn;
+      break;
+    }
+  }
 
-    // 既存のリンクを包んでいるナビゲーション要素を特定
+  // もし見つからない場合は、header内にある最初のボタンを対象にする
+  if (!targetBtn) {
+    targetBtn = header.querySelector('button');
+  }
+
+  if (targetBtn) {
+    // 2. ボタンの見た目とテキストを「MENU ☰」に変更
+    targetBtn.innerHTML = 'MENU ☰';
+    targetBtn.classList.add('safe-menu-btn');
+
+    // 3. 既存のナビゲーション要素を特定して開閉イベントを連動
     const navContainer = header.querySelector('nav') || header.querySelector('.nav-links') || header.querySelector('.desktop-nav');
     
-    if (navContainer) {
-      // ボタンをクリックしたとき、開閉用クラスの付け外しを行う
-      btn.addEventListener('click', (e) => {
+    if (navContainer && !targetBtn.dataset.listenerAdded) {
+      targetBtn.dataset.listenerAdded = 'true';
+      
+      targetBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         navContainer.classList.toggle('nav-mobile-open');
       });
 
-      // メニューが開いている時に、画面の他の場所をクリックしたら閉じる
+      // メニューの外側をクリックしたら閉じる
       document.addEventListener('click', (e) => {
         if (!header.contains(e.target)) {
           navContainer.classList.remove('nav-mobile-open');
