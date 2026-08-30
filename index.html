@@ -843,42 +843,41 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  // 画面内から「メニュー」という文字を含むボタンや要素を探す
-  const allElements = document.querySelectorAll('button, a, div, span');
-  
-  for (let el of allElements) {
-    if (el.textContent.includes('メニュー')) {
-      // 1. テキストを「MENU ☰」に書き換える
-      el.innerHTML = 'MENU ☰';
-      
-      // 2. 親の固定バナー（ヘッダー）から開閉対象のナビゲーションを探す
-      const header = el.closest('.fixed-banner') || document.querySelector('.fixed-banner') || document.querySelector('header');
+  // 画面幅が600px以下（スマホ）のときだけ実行する
+  if (window.innerWidth <= 600) {
+    const allElements = document.querySelectorAll('button, a, div, span');
+    
+    for (let el of allElements) {
+      if (el.textContent.includes('メニュー') || el.textContent.includes('MENU')) {
+        el.innerHTML = 'MENU ☰';
+        
+        const header = el.closest('.fixed-banner') || document.querySelector('.fixed-banner') || document.querySelector('header');
+        if (header) {
+          const navContainer = header.querySelector('nav') || header.querySelector('.nav-links') || header.querySelector('.desktop-nav') || header.querySelector('ul');
+          
+          if (navContainer) {
+            el.addEventListener('click', (e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              navContainer.classList.toggle('nav-mobile-open');
+            });
+          }
+        }
+        break;
+      }
+    }
+
+    // メニューの外側をクリックしたら閉じる（スマホ時のみ）
+    document.addEventListener('click', (e) => {
+      const header = document.querySelector('.fixed-banner') || document.querySelector('header');
       if (header) {
         const navContainer = header.querySelector('nav') || header.querySelector('.nav-links') || header.querySelector('.desktop-nav') || header.querySelector('ul');
-        
-        if (navContainer) {
-          // 3. クリックしたときにアコーディオンのクラスを切り替える
-          el.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            navContainer.classList.toggle('nav-mobile-open');
-          });
+        if (navContainer && !header.contains(e.target)) {
+          navContainer.classList.remove('nav-mobile-open');
         }
       }
-      break; // 最初に見つかった「メニュー」ボタンだけを書き換えて終了
-    }
+    });
   }
-
-  // メニューの外側をクリックしたときに閉じる処理
-  document.addEventListener('click', (e) => {
-    const header = document.querySelector('.fixed-banner') || document.querySelector('header');
-    if (header) {
-      const navContainer = header.querySelector('nav') || header.querySelector('.nav-links') || header.querySelector('.desktop-nav') || header.querySelector('ul');
-      if (navContainer && !header.contains(e.target)) {
-        navContainer.classList.remove('nav-mobile-open');
-      }
-    }
-  });
 });
 
   // --- プレイヤー関連の変数 ---
