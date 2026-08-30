@@ -909,50 +909,43 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  if (window.innerWidth <= 600) {
-    // 1. ヘッダーの外にある余計な「MENU ☰」ボタンを完全削除
-    document.querySelectorAll('button, a, div, span').forEach(el => {
-      if (el.textContent.trim() === 'MENU ☰' && !el.closest('.fixed-banner') && !el.closest('header')) {
-        el.remove();
-      }
-    });
+  setTimeout(() => {
+    const banner = document.querySelector('.fixed-banner') || document.querySelector('header');
+    if (!banner) return;
 
-    // 2. 上部バナー内の「メニュー」を「MENU ☰」に書き換え、アコーディオン化
-    const header = document.querySelector('.fixed-banner') || document.querySelector('header');
-    if (header) {
-      const menuBtn = Array.from(header.querySelectorAll('button, a, div, span')).find(el => el.textContent.includes('メニュー'));
-      if (menuBtn) {
-        menuBtn.innerHTML = 'MENU ☰';
-        
-        const nav = header.querySelector('nav') || header.querySelector('.nav-links') || header.querySelector('ul');
-        if (nav && !menuBtn.dataset.bound) {
-          menuBtn.dataset.bound = 'true';
-          nav.style.display = 'none';
-          
-          menuBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            const isOpen = nav.style.display === 'flex';
-            nav.style.display = isOpen ? 'none' : 'flex';
-            
-            if (!isOpen) {
-              nav.style.flexDirection = 'column';
-              nav.style.position = 'absolute';
-              nav.style.top = '100%';
-              nav.style.left = '0';
-              nav.style.width = '100%';
-              nav.style.background = '#181818';
-              nav.style.padding = '15px 20px';
-              nav.style.zIndex = '1000';
-              nav.style.boxShadow = '0 4px 12px rgba(0,0,0,0.5)';
-            }
-          });
-        }
+    // 余計に生成されてしまったボタンがあればすべて削除
+    document.querySelectorAll('#pureMobileMenuBtn, .custom-menu-btn').forEach(el => el.remove());
+
+    // 上部バナー内から「メニュー」の文字が含まれる要素を厳密に特定
+    const allElements = banner.querySelectorAll('button, a, div, span');
+    let targetEl = null;
+
+    for (let el of allElements) {
+      if (el.textContent.includes('メニュー') && el.children.length <= 1) {
+        targetEl = el;
+        break;
       }
     }
-  }
-});
 
+    if (targetEl) {
+      // テキストを強制的に書き換え
+      targetEl.textContent = 'MENU ☰';
+
+      // アコーディオンの開閉連動
+      const nav = banner.querySelector('nav') || banner.querySelector('.nav-links') || banner.querySelector('ul');
+      if (nav && !targetEl.dataset.bound) {
+        targetEl.dataset.bound = 'true';
+        targetEl.style.cursor = 'pointer';
+
+        targetEl.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          nav.classList.toggle('nav-mobile-open');
+        });
+      }
+    }
+  }, 300);
+});
   // --- プレイヤー関連の変数 ---
   let player = null;
   let isPlayerReady = false;
