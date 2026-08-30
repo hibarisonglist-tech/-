@@ -909,61 +909,45 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  // 画面幅が600px以下の場合のみ実行
   if (window.innerWidth <= 600) {
-    // ページ内のヘッダーや上部コンテナを広く探索する
-    const header = document.querySelector('header') || 
-                   document.querySelector('.fixed-banner') || 
-                   document.querySelector('#header') || 
-                   document.querySelector('[class*="header"]') || 
-                   document.querySelector('[class*="banner"]') || 
-                   document.body.firstElementChild;
-                   
-    if (!header) return;
+    // 1. ヘッダーの外にある余計な「MENU ☰」ボタンを完全削除
+    document.querySelectorAll('button, a, div, span').forEach(el => {
+      if (el.textContent.trim() === 'MENU ☰' && !el.closest('.fixed-banner') && !el.closest('header')) {
+        el.remove();
+      }
+    });
 
-    // スマホ用「MENU ☰」ボタンを生成して追加
-    if (!document.getElementById('pureMobileMenuBtn')) {
-      const mBtn = document.createElement('button');
-      mBtn.id = 'pureMobileMenuBtn';
-      mBtn.style.cssText = 'display: block !important; background: #222 !important; border: 1px solid #444 !important; color: #fff !important; padding: 6px 12px !important; border-radius: 4px !important; font-size: 13px !important; cursor: pointer !important; margin-left: auto !important;';
-      mBtn.innerHTML = 'MENU ☰';
-      header.appendChild(mBtn);
-
-      // ヘッダー内にあるメニューのリストやナビゲーション要素を広く探索
-      const navContainer = header.querySelector('nav') || 
-                           header.querySelector('ul') || 
-                           header.querySelector('[class*="nav"]') || 
-                           header.querySelector('[class*="menu"]');
-
-      if (navContainer) {
-        // 初期状態ではリンク群を非表示にする
-        navContainer.style.display = 'none';
-
-        mBtn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          if (navContainer.style.display === 'none') {
-            navContainer.style.display = 'flex';
-            navContainer.style.flexDirection = 'column';
-            navContainer.style.position = 'absolute';
-            navContainer.style.top = '100%';
-            navContainer.style.left = '0';
-            navContainer.style.width = '100%';
-            navContainer.style.background = '#181818';
-            navContainer.style.padding = '15px 20px';
-            navContainer.style.zIndex = '1000';
-            navContainer.style.gap = '12px';
-            navContainer.style.boxShadow = '0 4px 12px rgba(0,0,0,0.5)';
-          } else {
-            navContainer.style.display = 'none';
-          }
-        });
-
-        // メニュー外をクリックしたら閉じる
-        document.addEventListener('click', (e) => {
-          if (!header.contains(e.target)) {
-            navContainer.style.display = 'none';
-          }
-        });
+    // 2. 上部バナー内の「メニュー」を「MENU ☰」に書き換え、アコーディオン化
+    const header = document.querySelector('.fixed-banner') || document.querySelector('header');
+    if (header) {
+      const menuBtn = Array.from(header.querySelectorAll('button, a, div, span')).find(el => el.textContent.includes('メニュー'));
+      if (menuBtn) {
+        menuBtn.innerHTML = 'MENU ☰';
+        
+        const nav = header.querySelector('nav') || header.querySelector('.nav-links') || header.querySelector('ul');
+        if (nav && !menuBtn.dataset.bound) {
+          menuBtn.dataset.bound = 'true';
+          nav.style.display = 'none';
+          
+          menuBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const isOpen = nav.style.display === 'flex';
+            nav.style.display = isOpen ? 'none' : 'flex';
+            
+            if (!isOpen) {
+              nav.style.flexDirection = 'column';
+              nav.style.position = 'absolute';
+              nav.style.top = '100%';
+              nav.style.left = '0';
+              nav.style.width = '100%';
+              nav.style.background = '#181818';
+              nav.style.padding = '15px 20px';
+              nav.style.zIndex = '1000';
+              nav.style.boxShadow = '0 4px 12px rgba(0,0,0,0.5)';
+            }
+          });
+        }
       }
     }
   }
