@@ -396,57 +396,57 @@
         white-space: nowrap;
       }
 
-      /* スマホ用メニューボタンのスタイル */
-      .mobile-menu-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: rgba(230, 57, 115, 0.2);
-        border: 1px solid var(--primary-pink, #ff69b4);
-        color: #fff;
-        padding: 8px 16px;
-        border-radius: 20px;
-        font-size: 0.85rem;
-        cursor: pointer;
-        font-family: var(--font-family);
-      }
+/* スマホ用メニューボタンのスタイル */
+  .mobile-menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(230, 57, 115, 0.2);
+    border: 1px solid var(--primary-pink, #ff69b4);
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    font-family: var(--font-family);
+  }
 
-      /* ②アコーディオン式メニュー（アイコン含む）のスタイル */
-      .mobile-dropdown-menu {
-        display: none;
-        position: absolute;
-        top: 100%;
-        right: 15px;
-        background: #1e1e2f;
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-        padding: 12px;
-        flex-direction: column;
-        gap: 10px;
-        z-index: 1000;
-        min-width: 200px;
-      }
-      .mobile-dropdown-menu.is-open {
-        display: flex;
-      }
-      .mobile-dropdown-menu a {
-        color: #fff;
-        text-decoration: none;
-        font-size: 0.9rem;
-        padding: 8px 10px;
-        text-align: left;
-        background: transparent;
-        border: none;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        border-radius: 6px;
-        transition: background 0.2s;
-      }
-      .mobile-dropdown-menu a:hover {
-        background: rgba(230, 57, 115, 0.2);
-      }
+  /* アコーディオン式メニューのスタイル */
+  .mobile-dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 15px;
+    background: #1e1e2f;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    padding: 12px;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1000;
+    min-width: 200px;
+  }
+  .mobile-dropdown-menu.is-open {
+    display: flex;
+  }
+  .mobile-dropdown-menu a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 8px 10px;
+    text-align: left;
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 6px;
+    transition: background 0.2s;
+  }
+  .mobile-dropdown-menu a:hover {
+    background: rgba(230, 57, 115, 0.2);
+  }
       .mobile-dropdown-menu .nav-icon {
         width: 20px;
         height: 20px;
