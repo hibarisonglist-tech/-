@@ -843,48 +843,59 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  const header = document.querySelector('.fixed-banner') || document.querySelector('header');
-  if (!header) return;
+  // 少しだけ遅延させて確実にDOMが読み込まれた後に実行
+  setTimeout(() => {
+    const header = document.querySelector('.fixed-banner') || document.querySelector('header');
+    if (!header) return;
 
-  // 1. 元々HTMLにある「メニュー」ボタンを探す（テキストに「メニュー」が含まれるボタン、または特定のボタン）
-  let targetBtn = null;
-  const buttons = header.querySelectorAll('button');
-  for (let btn of buttons) {
-    if (btn.textContent.includes('メニュー')) {
-      targetBtn = btn;
-      break;
+    // 「メニュー」または「MENU」が含まれる要素、あるいはヘッダー内のボタンを探索
+    const allElements = header.querySelectorAll('button, div, span, a');
+    let targetBtn = null;
+
+    for (let el of allElements) {
+      const text = el.textContent.trim();
+      if ((text.includes('メニュー') || text.includes('MENU')) && el.tagName) {
+        targetBtn = el;
+        break;
+      }
     }
-  }
 
-  // もし見つからない場合は、header内にある最初のボタンを対象にする
-  if (!targetBtn) {
-    targetBtn = header.querySelector('button');
-  }
+    // それでも見つからない場合はヘッダー内の最初のボタンを指定
+    if (!targetBtn) {
+      targetBtn = header.querySelector('button');
+    }
 
-  if (targetBtn) {
-    // 2. ボタンの見た目とテキストを「MENU ☰」に変更
-    targetBtn.innerHTML = 'MENU ☰';
-    targetBtn.classList.add('safe-menu-btn');
+    if (targetBtn) {
+      // テキストとデザインを強制的に変更
+      targetBtn.innerHTML = 'MENU ☰';
+      targetBtn.style.background = '#222';
+      targetBtn.style.border = '1px solid #444';
+      targetBtn.style.color = '#fff';
+      targetBtn.style.padding = '6px 14px';
+      targetBtn.style.borderRadius = '20px';
+      targetBtn.style.cursor = 'pointer';
+      targetBtn.style.fontSize = '0.85rem';
 
-    // 3. 既存のナビゲーション要素を特定して開閉イベントを連動
-    const navContainer = header.querySelector('nav') || header.querySelector('.nav-links') || header.querySelector('.desktop-nav');
-    
-    if (navContainer && !targetBtn.dataset.listenerAdded) {
-      targetBtn.dataset.listenerAdded = 'true';
+      // 既存のナビゲーション要素を特定して開閉イベントを連動
+      const navContainer = header.querySelector('nav') || header.querySelector('.nav-links') || header.querySelector('.desktop-nav') || header.querySelector('ul');
       
-      targetBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        navContainer.classList.toggle('nav-mobile-open');
-      });
+      if (navContainer && !targetBtn.dataset.listenerAdded) {
+        targetBtn.dataset.listenerAdded = 'true';
+        
+        targetBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          navContainer.classList.toggle('nav-mobile-open');
+        });
 
-      // メニューの外側をクリックしたら閉じる
-      document.addEventListener('click', (e) => {
-        if (!header.contains(e.target)) {
-          navContainer.classList.remove('nav-mobile-open');
-        }
-      });
+        // メニューの外側をクリックしたら閉じる
+        document.addEventListener('click', (e) => {
+          if (!header.contains(e.target)) {
+            navContainer.classList.remove('nav-mobile-open');
+          }
+        });
+      }
     }
-  }
+  }, 100);
 });
 
   // --- プレイヤー関連の変数 ---
