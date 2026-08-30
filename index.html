@@ -909,42 +909,38 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  setTimeout(() => {
+  const applyMenuFix = () => {
+    if (window.innerWidth > 600) return;
+
     const banner = document.querySelector('.fixed-banner') || document.querySelector('header');
     if (!banner) return;
 
-    // 余計に生成されてしまったボタンがあればすべて削除
+    // 余計な重複ボタンを排除
     document.querySelectorAll('#pureMobileMenuBtn, .custom-menu-btn').forEach(el => el.remove());
 
-    // 上部バナー内から「メニュー」の文字が含まれる要素を厳密に特定
-    const allElements = banner.querySelectorAll('button, a, div, span');
-    let targetEl = null;
-
-    for (let el of allElements) {
-      if (el.textContent.includes('メニュー') && el.children.length <= 1) {
-        targetEl = el;
+    // ヘッダー内の「メニュー」を含む要素を確実に捉えて書き換える
+    const elements = banner.querySelectorAll('button, a, div, span');
+    for (let el of elements) {
+      if (el.textContent.includes('メニュー')) {
+        el.innerHTML = 'MENU ☰';
+        
+        const nav = banner.querySelector('nav') || banner.querySelector('.nav-links') || banner.querySelector('ul');
+        if (nav && !el.dataset.bound) {
+          el.dataset.bound = 'true';
+          el.style.cursor = 'pointer';
+          el.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            nav.classList.toggle('nav-mobile-open');
+          });
+        }
         break;
       }
     }
+  };
 
-    if (targetEl) {
-      // テキストを強制的に書き換え
-      targetEl.textContent = 'MENU ☰';
-
-      // アコーディオンの開閉連動
-      const nav = banner.querySelector('nav') || banner.querySelector('.nav-links') || banner.querySelector('ul');
-      if (nav && !targetEl.dataset.bound) {
-        targetEl.dataset.bound = 'true';
-        targetEl.style.cursor = 'pointer';
-
-        targetEl.addEventListener('click', (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          nav.classList.toggle('nav-mobile-open');
-        });
-      }
-    }
-  }, 300);
+  applyMenuFix();
+  setTimeout(applyMenuFix, 400); // 読み込み遅延対策
 });
   // --- プレイヤー関連の変数 ---
   let player = null;
