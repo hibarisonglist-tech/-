@@ -3573,6 +3573,15 @@ youtube: "",
     youtube: "",
  customThumbnail:"https://pbs.twimg.com/media/F2w-nIJboAAnib9?format=jpg&name=large" // ← 手動で入れたいサムネイルのパス（無い場合は空欄でNo Imageになる）
 },
+{ id:323,
+    title:"エゴロック",
+    artist:"すりぃ",
+    date: "2026-08-30",
+   singers: ["渡会雲雀","風楽奏斗","四季凪アキラ","セラフ・ダズルガーデン"],
+       group: ["VOLTACTION"],
+        tags: ["歌ってみた","コラボ",,"再生リスト未収録"],
+    youtube: "https://youtube.com/shorts/yGExcILWOOg?si=MRkvApLpm_j9M0i3",
+},
 
 
 

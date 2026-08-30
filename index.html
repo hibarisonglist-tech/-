@@ -199,11 +199,11 @@
     .sortable-ghost { opacity: 0.4; border: 2px dashed var(--primary-pink); }
 
     .yt-btn.is-disabled {
-  background-color: #2a2a2a !important;
-  color: #666 !important;
-  cursor: default !important;
-  pointer-events: none !important;
-}
+      background-color: #2a2a2a !important;
+      color: #666 !important;
+      cursor: default !important;
+      pointer-events: none !important;
+    }
 
     .fav-btn {
       position: absolute; top: 14px; right: 14px; background: rgba(230, 57, 115, 0.15);
@@ -219,7 +219,7 @@
     .song-title { font-weight: bold; font-size: 14px; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-right: 25px; }
     .song-artist { font-size: 12px; color: #a0aec0; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-    .singers-container { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 6px; align-items: center; }
+    .singers-container { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 6px; align-items: center; min-height: 28px; }
    
     .singer-icon {
       width: 28px; height: 28px; border-radius: 50%; object-fit: cover;
@@ -230,33 +230,30 @@
     }
     .group-icon { border-radius: 50%; }
 
-.tags-container {
- display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  margin-top: 6px;
-  margin-bottom: 0px; 
-}
+    .tags-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 6px;
+      margin-bottom: 0px; 
+    }
 
-.tag {
-  font-size: 0.65rem;
-  background-color: var(--primary-pink, #e84393);
-  color: #ffffff;
-  padding: 1px 6px;
-  border-radius: 9999px;
-  display: inline-block;
-}
+    .tag {
+      font-size: 0.65rem;
+      background-color: var(--primary-pink, #e84393);
+      color: #ffffff;
+      padding: 1px 6px;
+      border-radius: 9999px;
+      display: inline-block;
+    }
     .tag-badge { font-size: 0.65rem; background: var(--primary-pink); color: #fff; padding: 2px 8px; border-radius: 10px; cursor: pointer; }
    
     .yt-btn {
-      margin-top:10px;
+      margin-top: 10px;
       border: 1px solid #ff758c; background: rgba(230, 57, 115, 0.15); color: #fff;
       text-decoration: none; padding: 6px 0; border-radius: 15px; font-size: 12px;
-      transition: 0.2s; cursor: pointer;
+      transition: 0.2s; cursor: pointer; text-align: center; display: block;
     }
-    .yt-btn.is-disabled {
-  margin-top: 10px;
-}
     .yt-btn:hover { background: var(--primary-pink); }
 
     .player-bar {
@@ -369,252 +366,217 @@
       max-height: 200px;
       overflow-y: auto;
     }
-/* スマホ向けレイアウト調整 */
-@media (max-width: 600px) {
-  /* ① トップ画像の上下の余白は狭いまま、ロゴ自体の高さを大きく指定 */
-  .custom-logo-header {
-    padding-top: 6px !important;
-    padding-bottom: 6px !important;
-    margin-bottom: 0 !important;
-  }
-  .logo-wrapper {
-    margin: 0 !important;
-  }
-  .animated-main-logo {
-    height: 170px !important;
-    width: 100% !important;
-    background-size: contain !important;
-    background-repeat: no-repeat !important;
-    background-position: center !important;
-    object-fit: contain !important;
-  }
 
-  /* ② 上バナー（右寄せ＆アイコンの間隔を個別に調整） */
-  .top-fixed-bar {
-    padding: 4px 4px 4px 8px;
-    height: 34px;
-    font-size: 11px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-sizing: border-box;
-  }
+    /* スマホ向けレイアウト調整 */
+    @media (max-width: 600px) {
+      .custom-logo-header {
+        padding-top: 6px !important;
+        padding-bottom: 6px !important;
+        margin-bottom: 0 !important;
+      }
+      .logo-wrapper {
+        margin: 0 !important;
+      }
+      .animated-main-logo {
+        height: 170px !important;
+        width: 100% !important;
+        background-size: contain !important;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+      }
 
-  .top-brand {
-    font-size: 12px;
-    white-space: nowrap;
-  }
+      .top-fixed-bar {
+        padding: 4px 10px;
+        height: 50px;
+        font-size: 12px;
+      }
 
-  /* メニュー群全体 */
-  .top-nav {
-    display: flex;
-    align-items: center;
-    gap: 4px; /* 基本の間隔 */
-  }
+      .top-brand {
+        font-size: 13px;
+        white-space: nowrap;
+      }
 
-  .top-nav .nav-link {
-    font-size: 10px;
-    white-space: nowrap;
-    padding: 0 2px;
-  }
+      /* スマホ用メニューボタンのスタイル */
+      .mobile-menu-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(230, 57, 115, 0.2);
+        border: 1px solid var(--primary-pink, #ff69b4);
+        color: #fff;
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        cursor: pointer;
+        font-family: var(--font-family);
+      }
 
-  /* 3番目（YouTubeマーク）の左側に少し余白をあけて「ABOUT」と離す */
-  .top-nav .nav-link:nth-child(3) {
-    margin-left: 6px; 
-  }
+      /* スマホ用プルダウンメニューのスタイル */
+      .mobile-dropdown-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 15px;
+        background: #1e1e2f;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        padding: 12px;
+        flex-direction: column;
+        gap: 8px;
+        z-index: 1000;
+        min-width: 180px;
+      }
+      .mobile-dropdown-menu.is-open {
+        display: flex;
+      }
+      .mobile-dropdown-menu a, .mobile-dropdown-menu button {
+        color: #fff;
+        text-decoration: none;
+        font-size: 0.9rem;
+        padding: 8px 10px;
+        text-align: left;
+        background: transparent;
+        border: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
 
-  .nav-icon {
-    width: 13px;
-    height: 13px;
-  }
+      /* PC用の通常ナビゲーションはスマホでは非表示 */
+      .top-nav .desktop-nav-links {
+        display: none !important;
+      }
 
-  /* ③ タイトルとアーティスト名がお気に入りボタンと被らないようにし、「…」で省略 */
-  .song-title, 
-  .song-artist {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    padding-right: 32px; /* ★ボタンと重ならないための余白 */
-  }
+      .song-title, 
+      .song-artist {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        padding-right: 32px;
+      }
 
-  .song-card {
-    display: grid;
-    grid-template-columns: 95px 1fr;
-    grid-template-rows: auto auto auto auto;
-    padding: 8px 10px;
-    column-gap: 12px;
-    row-gap: 4px;
-  }
+      .song-card {
+        display: grid;
+        grid-template-columns: 95px 1fr;
+        grid-template-rows: auto auto auto auto;
+        padding: 8px 10px;
+        column-gap: 12px;
+        row-gap: 4px;
+      }
 
-  /* サムネイル（1列目・1行目） */
-  .thumb-frame {
-    grid-column: 1;
-    grid-row: 1;
-    width: 95px;
-    height: 53px;
-    margin-bottom: 0;
-  }
+      .thumb-frame {
+        grid-column: 1;
+        grid-row: 1;
+        width: 95px;
+        height: 53px;
+        margin-bottom: 0;
+      }
 
-  /* 再生ボタン（1列目・2行目） */
-  .yt-btn {
-    grid-column: 1;
-    grid-row: 2;
-    width: 95px;
-    height: 25px;
-    padding: 0;
-    font-size: 11px;
-    border-radius: 12px;
-    margin-top: 2px;
-  }
+      .yt-btn {
+        grid-column: 1;
+        grid-row: 2;
+        width: 95px;
+        height: 25px;
+        padding: 0;
+        font-size: 11px;
+        border-radius: 12px;
+        margin-top: 2px;
+        line-height: 23px;
+      }
 
-  /* 右側のテキスト群（タイトル・アーティスト・公開日）をひとまとめにして隙間を詰める */
-  .card-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    grid-column: 2;
-    grid-row: 1 / span 2;
-    gap: 1px;
-    padding-right: 0;
-    width: 100%;
-    min-width: 0;
-  }
+      .card-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        grid-column: 2;
+        grid-row: 1 / span 2;
+        gap: 1px;
+        padding-right: 0;
+        width: 100%;
+        min-width: 0;
+      }
 
-  .song-title {
-    font-size: 13px;
-    margin: 0;
-    line-height: 1.2;
-  }
-  .song-artist {
-    font-size: 11.5px;
-    color: #a0aec0;
-    margin: 0;
-    line-height: 1.2;
-  }
-  .song-date {
-  font-size: 0.75rem;
-  color: #94a3b8;
-  margin-top: 2px;
-}
+      .song-title {
+        font-size: 13px;
+        margin: 0;
+        line-height: 1.2;
+      }
+      .song-artist {
+        font-size: 11.5px;
+        color: #a0aec0;
+        margin: 0;
+        line-height: 1.2;
+      }
 
-  /* アイコン（カード全体の横幅いっぱい・3行目） */
-  .singers-container {
-    grid-column: 1 / span 2;
-    grid-row: 3;
-    margin-top: 4px;
-    margin-bottom: 0;
-    gap: 4px;
-  }
+      .singers-container {
+        grid-column: 1 / span 2;
+        grid-row: 3;
+        margin-top: 4px;
+        margin-bottom: 0;
+        gap: 4px;
+      }
 
-  /* タグ（カード全体の横幅いっぱい・4行目） */
- .tags-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  margin-top: 6px;
-  margin-bottom: 12px; /* タグと再生ボタンの間に1枚目と同じ十分な隙間を作ります */
-}
+      .tags-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        margin-top: 6px;
+        margin-bottom: 12px;
+      }
 
-  /* タグのサイズ調整 */
-  .tag-badge {
-    font-size: 0.58rem !important;
-    padding: 0.15rem 0.4rem !important;
-    border-radius: 8px !important;
-  }
+      .tag-badge {
+        font-size: 0.58rem !important;
+        padding: 0.15rem 0.4rem !important;
+        border-radius: 8px !important;
+      }
 
-  /* 6人以上のアイコンスタック表示（スマホ版） */
-  .singers-container.is-stacked {
-    flex-wrap: nowrap !important;
-    overflow: visible !important;
-  }
-  .singers-container.is-stacked .singer-icon {
-    width: 24px !important;
-    height: 24px !important;
-    margin-right: -7px !important;
-    border: 2px solid var(--card-bg);
-  }
-  .singer-more-badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background-color: #333;
-    color: #fff;
-    font-size: 0.55rem;
-    font-weight: bold;
-    margin-left: 6px;
-    border: 2px solid var(--card-bg);
-    cursor: pointer;
-    flex-shrink: 0;
-  }
+      .singers-container.is-stacked {
+        flex-wrap: nowrap !important;
+        overflow: visible !important;
+      }
+      .singers-container.is-stacked .singer-icon {
+        width: 24px !important;
+        height: 24px !important;
+        margin-right: -7px !important;
+        border: 2px solid var(--card-bg);
+      }
+      .singer-more-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background-color: #333;
+        color: #fff;
+        font-size: 0.55rem;
+        font-weight: bold;
+        margin-left: 6px;
+        border: 2px solid var(--card-bg);
+        cursor: pointer;
+        flex-shrink: 0;
+      }
 
-  /* ④ 大・小カテゴリーなどのボタン群を横スクロール（スライド式）にする */
-  .categories,
-  .category-container, 
-  .filter-container {
-    display: flex;
-    flex-wrap: nowrap !important;
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch;
-    gap: 8px;
-    padding-bottom: 4px;
-  }
+      .categories,
+      .category-container, 
+      .filter-container {
+        display: flex;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+        gap: 8px;
+        padding-bottom: 4px;
+      }
 
-  /* スクロール時に中のボタンが縮んでしまわないようにする */
-  .categories button,
-  .category-container button, 
-  .filter-container button,
-  .category-btn,
-  .tag-filter-btn {
-    flex-shrink: 0;
-  }
+      .categories button,
+      .category-container button, 
+      .filter-container button,
+      .category-btn,
+      .tag-filter-btn {
+        flex-shrink: 0;
+      }
 
-
-  /* ④ 大・小カテゴリーなどのボタン群を横スクロール（スライド式）にする */
-  .categories,
-  .category-container, 
-  .filter-container {
-    display: flex;
-    flex-wrap: nowrap !important;
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch;
-    gap: 8px;
-    padding-bottom: 4px;
-  }
-
-  /* スクロール時に中のボタンが縮んでしまわないようにする */
-  .categories button,
-  .category-container button, 
-  .filter-container button,
-  .category-btn,
-  .tag-filter-btn {
-    flex-shrink: 0;
-  }
-
-  /* ④ 大・小カテゴリーなどのボタン群を横スクロール（スライド式）にする */
-  .categories,
-  .category-container, 
-  .filter-container {
-    display: flex;
-    flex-wrap: nowrap !important;
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch;
-    gap: 8px;
-    padding-bottom: 4px;
-  }
-
-  /* スクロール時に中のボタンが縮んでしまわないようにする */
-  .categories button,
-  .category-container button, 
-  .filter-container button,
-  .category-btn,
-  .tag-filter-btn {
-    flex-shrink: 0;
-  }
-}
-     
       .fav-btn { top: 8px; right: 8px; width: 28px; height: 28px; font-size: 0.9rem; }
      
       .player-bar {
@@ -630,140 +592,58 @@
       .close-btn svg { width: 16px; height: 16px; }
      
       .yt-container { bottom: 170px; right: 10px; width: 150px; height: 85px; }
-    
-.singers-container {
-      display: flex;
-      gap: 4px;
-      margin-top: 6px;
-      flex-wrap: wrap;
-      align-items: center;
-      min-height: 28px;
     }
-    /* スタック有効時の設定（1行に強制してはみ出た分を隠す） */
-    .singers-container.is-stacked {
-      flex-wrap: nowrap;
-      overflow: hidden;
+
+    /* PC版ではスマホ用メニューボタンを非表示にする */
+    @media (min-width: 601px) {
+      .mobile-menu-btn, .mobile-dropdown-menu {
+        display: none !important;
+      }
     }
-.singer-more-badge {
-      background: rgba(0, 0, 0, 0.3);
-      border: 2px solid #2A4B71;
-      color: #fff;
-      font-size: 0.70rem;
-      width: 28px;
-      height: 28px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      cursor: pointer;
-      font-weight: bold;
-      flex-shrink: 0;
-      transition: all 0.2s;
-    }
-    .singer-more-badge:hover {
-      background: rgba(0, 0, 0, 0.6);
-      border-color: var(--primary-pink);
-      color: #fff;
-    }
-    @media (max-width: 768px) {
-  /* ① 上部固定バナーの高さを広げる */
-  header, .fixed-header, .top-banner {
-    min-height: 65px;
-    padding: 10px 15px;
-  }
-
-  /* 既存のぎゅうぎゅうなリンク群をスマホでは一旦非表示にする */
-  .desktop-nav, .nav-links-container {
-    display: none !important;
-  }
-
-  /* ② スマホ用メニューボタンのスタイル */
-  .mobile-menu-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid var(--primary-pink, #ff69b4);
-    color: #fff;
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    cursor: pointer;
-  }
-
-  /* スマホ用プルダウンメニューのスタイル */
-  .mobile-dropdown-menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    right: 15px;
-    background: #1e1e2f; /* サイトの背景色に合わせて調整してください */
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    padding: 10px;
-    flex-direction: column;
-    gap: 8px;
-    z-index: 1000;
-    min-width: 180px;
-  }
-  .mobile-dropdown-menu.is-open {
-    display: flex;
-  }
-  .mobile-dropdown-menu a, .mobile-dropdown-menu button {
-    color: #fff;
-    text-decoration: none;
-    font-size: 0.9rem;
-    padding: 8px 10px;
-    text-align: left;
-    background: transparent;
-    border: none;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-}
-
-/* PC版ではスマホ用メニューボタンを非表示にする */
-@media (min-width: 769px) {
-  .mobile-menu-btn, .mobile-dropdown-menu {
-    display: none !important;
-  }
-}
 </style>
-
 </head>
-<button class="mobile-menu-btn" onclick="toggleMobileMenu(event)">
-  メニュー ▼
-</button>
 <body id="topPage">
+
 <div class="top-fixed-bar">
   <a href="#topPage" class="top-brand">Studio Hibari</a>
-  <div class="top-nav">
- <div class="mobile-dropdown-menu" id="mobileDropdownMenu"></div>   
-<a href="#library" onclick="closeMobileMenu()">✦ MUSIC LIBRARY</a>
-<a href="#about" onclick="closeMobileMenu()">✦ ABOUT</a>
-<div style="display: flex; gap: 10px; padding: 5px 10px;"></div>
-<!-- YouTubeアイコンなどのリンク -->
-    <a href="https://www.youtube.com/@WataraiHibari" target="_blank" style="padding:0;">YouTube</a>
-    <a href="https://x.com/watarai_hibari="_blank" style="padding:0;">X (Twitter)</a>
+  
+  <!-- PC用ナビゲーション -->
+  <div class="top-nav desktop-nav-links">
+    <a href="#musicLibraryHeading" class="nav-link">✦ MUSIC LIBRARY</a>
+    <a href="#aboutSection" class="nav-link">✦ ABOUT</a>
+    <a href="https://www.youtube.com/@WataraiHibari" target="_blank" class="nav-link" aria-label="YouTube">
+      <svg class="nav-icon" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+    </a>
+    <a href="https://x.com/watarai_hibari" target="_blank" class="nav-link" aria-label="X (Twitter)">
+      <svg class="nav-icon" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+    </a>
+  </div>
+
+  <!-- スマホ用メニューボタン ＆ プルダウンメニュー -->
+  <button class="mobile-menu-btn" onclick="toggleMobileMenu(event)">
+    メニュー ▼
+  </button>
+  <div class="mobile-dropdown-menu" id="mobileDropdownMenu">
+    <a href="#musicLibraryHeading" onclick="closeMobileMenu()">✦ MUSIC LIBRARY</a>
+    <a href="#aboutSection" onclick="closeMobileMenu()">✦ ABOUT</a>
+    <a href="https://www.youtube.com/@WataraiHibari" target="_blank" onclick="closeMobileMenu()">YouTube</a>
+    <a href="https://x.com/watarai_hibari" target="_blank" onclick="closeMobileMenu()">X (Twitter)</a>
   </div>
 </div>
 
-<!-- 1. トップ画像（枠の外に配置） -->
+<!-- 1. トップ画像 -->
 <header class="custom-logo-header">
   <div class="logo-wrapper">
     <div class="animated-main-logo" role="img" aria-label="トップ画像"></div>
   </div>
 </header>
 
-<!-- 2. ここから下に、もともとサイト全体を囲んでいたピンクの大きな枠が始まります -->
+<!-- 2. メインコンテンツ枠 -->
 <div class="outer-frame">
   <div class="section-heading" id="musicLibraryHeading" style="margin-bottom: 4px;">✦ MUSIC LIBRARY</div>
   <div class="ornament-divider">
     <span>✦</span>
   </div>
-  <!-- この下にカテゴリー、検索、楽曲リストなどの既存の要素がそのまま続きます（※閉じタグはページ下部の元の位置のまま変更していません） -->
 
   <div class="controls-container">
     <div>
@@ -792,21 +672,21 @@
         <button class="sub-filter-btn" data-sub="2時だとか/バンド" onclick="toggleSubFilter('2時だとか/バンド')">2時だとか/バンド <span class="count">(0)</span></button>
         <button class="sub-filter-btn" data-sub="Shorts" onclick="toggleSubFilter('Shorts')">Shorts <span class="count">(0)</span></button>
         <button class="sub-filter-btn" data-sub="Mix" onclick="toggleSubFilter('Mix')">Mix <span class="count">(0)</span></button>
-       <button class="sub-filter-btn" data-sub="コーラス/演奏" onclick="toggleSubFilter('コーラス/演奏')">コーラス/演奏 <span class="count">(0)</span></button>
-<button class="sub-filter-btn" data-sub="再生リスト未収録" onclick="toggleSubFilter('再生リスト未収録')">再生リスト未収録 <span class="count">(0)</span></button>
+        <button class="sub-filter-btn" data-sub="コーラス/演奏" onclick="toggleSubFilter('コーラス/演奏')">コーラス/演奏 <span class="count">(0)</span></button>
+        <button class="sub-filter-btn" data-sub="再生リスト未収録" onclick="toggleSubFilter('再生リスト未収録')">再生リスト未収録 <span class="count">(0)</span></button>
       </div>
     </div>
 
-<div class="fav-notice" id="favNotice">
-  <div style="margin-bottom: 10px; text-align: center;">
-    <div style="font-weight: bold; font-size: 0.95rem; margin-bottom: 4px; color: var(--primary-pink, #ff69b4);">✦ マイリストの使い方 ✦</div>
-    <div style="font-size: 0.8rem; line-height: 1.5; opacity: 0.9;">
-      ・カードをドラッグして自由に並び替え（スマホは長押し / 自動保存・他端末引き継ぎ不可）<br>
-      ・1曲・全曲リピート、シャッフル対応（※全曲リピート時は手動で次の曲へ進めてください）
+    <div class="fav-notice" id="favNotice">
+      <div style="margin-bottom: 10px; text-align: center;">
+        <div style="font-weight: bold; font-size: 0.95rem; margin-bottom: 4px; color: var(--primary-pink, #ff69b4);">✦ マイリストの使い方 ✦</div>
+        <div style="font-size: 0.8rem; line-height: 1.5; opacity: 0.9;">
+          ・カードをドラッグして自由に並び替え（スマホは長押し / 自動保存・他端末引き継ぎ不可）<br>
+          ・1曲・全曲リピート、シャッフル対応（※全曲リピート時は手動で次の曲へ進めてください）
+        </div>
+      </div>
+      <button class="start-play-btn" onclick="startPlaylist()">▶ マイリストを再生</button>
     </div>
-  </div>
-  <button class="start-play-btn" onclick="startPlaylist()">▶ マイリストを再生</button>
-</div>
 
     <div class="search-sort-row">
       <input type="text" id="searchInput" class="search-input" placeholder="検索 (曲名/歌手/タグ等)" oninput="renderSongs()">
@@ -844,7 +724,6 @@
     <p class="about-note">※掲載楽曲は、公式動画・公式チャンネルへのリンクをご案内しています。</p>
     <p class="about-note">※掲載コンテンツの無断転載・二次利用はご遠慮ください。</p>
   </div>
-</div>
 
 <div class="yt-container" id="ytContainer">
   <div id="ytplayer"></div>
@@ -894,7 +773,7 @@
 </div>
 
 <script>
-  // --- プレイヤー関連の変数を先頭に配置 ---
+  // --- プレイヤー関連の変数 ---
   let player = null;
   let isPlayerReady = false;
   let playQueue = [];
@@ -905,7 +784,7 @@
   // --- 状態管理・データ用の変数 ---
   let selectedCategory = localStorage.getItem('hibari_category') || "";
   let selectedSubFilter = localStorage.getItem('hibari_subfilter') || "";
-  let isMylistCategorySelected = (selectedCategory === 'マイリスト'); // ← ここに追加
+  let isMylistCategorySelected = (selectedCategory === 'マイリスト');
   let favorites = JSON.parse(localStorage.getItem('hibari_mylist') || localStorage.getItem('hibari_favs') || '[]').map(String);
   let sortableInstance = null;
   let currentlyRenderedSongs = [];
@@ -1046,7 +925,7 @@
   function toggleTag(tag) {
     selectedCategory = (selectedCategory === tag) ? "" : tag;
     selectedSubFilter = "";
-    isMylistCategorySelected = (selectedCategory === 'マイリスト'); // ← ここに追記
+    isMylistCategorySelected = (selectedCategory === 'マイリスト');
    
     document.querySelectorAll('.category-btn').forEach(btn => {
       const btnTag = btn.getAttribute('data-tag');
@@ -1073,7 +952,7 @@
     renderSongs();
   }
 
-function songHasCategory(song, category) {
+  function songHasCategory(song, category) {
     if (!song.tags) return false;
     if (song.tags.includes(category)) return true;
     if (category === 'その他' && (song.tags.includes('Mix') || song.tags.includes('コーラス/演奏'))) {
@@ -1081,6 +960,7 @@ function songHasCategory(song, category) {
     }
     return false;
   }
+
   function matchSearch(song, query) {
     if (!query) return true;
     const groupText = song.group ? song.group.join(' ') : '';
@@ -1179,7 +1059,7 @@ function songHasCategory(song, category) {
     });
   }
 
- function handlePlayAction(songId, youtubeUrl) {
+  function handlePlayAction(songId, youtubeUrl) {
     if (selectedCategory === 'マイリスト') {
       playSpecificSong(songId);
     } else {
@@ -1189,7 +1069,7 @@ function songHasCategory(song, category) {
     }
   }
 
-function renderSongs() {
+  function renderSongs() {
     if (typeof songs === 'undefined' || !Array.isArray(songs)) {
       setTimeout(renderSongs, 50);
       return;
@@ -1361,13 +1241,13 @@ function renderSongs() {
       sortableInstance.destroy();
       sortableInstance = null;
     }
-   if (isMylistCategorySelected) { // ① マイリストのときは常に並び替えを有効化
+    if (isMylistCategorySelected) {
       sortableInstance = new Sortable(grid, {
         animation: 150,
         ghostClass: 'sortable-ghost',
         filter: 'button, a, input',
         preventOnFilter: false,
-        forceFallback: true, // ② スマホやタブレットでも確実にドラッグできるように対応
+        forceFallback: true,
         onEnd: function () {
           const currentDOMOrder = Array.from(grid.children).map(card => card.dataset.id);
           const updatedMylist = [...currentDOMOrder];
@@ -1380,6 +1260,7 @@ function renderSongs() {
       });
     }
   }
+
   function onYouTubeIframeAPIReady() {
     player = new YT.Player('ytplayer', {
       host: 'https://www.youtube-nocookie.com',
@@ -1575,6 +1456,22 @@ function renderSongs() {
     renderSongs();
   }
 
+  // --- モバイル用メニュー制御 ---
+  function toggleMobileMenu(e) {
+    if (e) e.stopPropagation();
+    const menu = document.getElementById('mobileDropdownMenu');
+    if (menu) {
+      menu.classList.toggle('is-open');
+    }
+  }
+
+  function closeMobileMenu() {
+    const menu = document.getElementById('mobileDropdownMenu');
+    if (menu) {
+      menu.classList.remove('is-open');
+    }
+  }
+
   window.addEventListener('DOMContentLoaded', () => {
     loadState();
     renderSongs();
@@ -1590,30 +1487,18 @@ function renderSongs() {
         if (e.target === modal) modal.style.display = 'none';
       });
     }
-    function toggleMobileMenu(e) {
-  e.stopPropagation();
-  const menu = document.getElementById('mobileDropdownMenu');
-  if (menu) {
-    menu.classList.toggle('is-open');
-  }
-}
 
-function closeMobileMenu() {
-  const menu = document.getElementById('mobileDropdownMenu');
-  if (menu) {
-    menu.classList.remove('is-open');
-  }
-}
-
-// メニューが開いているときに外側をクリックしたら閉じる
-document.addEventListener('click', () => {
-  const menu = document.getElementById('mobileDropdownMenu');
-  if (menu && menu.classList.contains('is-open')) {
-    menu.classList.remove('is-open');
-  }
-});
+    // メニューが開いているときに外側をクリックしたら閉じる
+    document.addEventListener('click', (e) => {
+      const menu = document.getElementById('mobileDropdownMenu');
+      const btn = document.querySelector('.mobile-menu-btn');
+      if (menu && menu.classList.contains('is-open')) {
+        if (!menu.contains(e.target) && btn && !btn.contains(e.target)) {
+          menu.classList.remove('is-open');
+        }
+      }
+    });
   });
-
 </script>
 </body>
 </html>
