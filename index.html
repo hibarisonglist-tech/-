@@ -610,6 +610,59 @@
         display: none !important;
       }
     }
+    /* ==========================================
+   スマホ表示（600px以下）のアコーディオン設定
+   ========================================== */
+@media (max-width: 600px) {
+  /* 動的に生成されるスマホ用ボタンのデザイン */
+  .safe-menu-btn {
+    background: #222 !important;
+    border: 1px solid #444 !important;
+    color: #fff !important;
+    padding: 6px 12px !important;
+    border-radius: 4px !important;
+    font-size: 13px !important;
+    cursor: pointer !important;
+    display: block !important;
+    margin-left: auto;
+  }
+
+  /* 既存のナビゲーションやリンク群を、初期状態では非表示（収納）にする */
+  /* ※もしスマホで隠したい要素のクラス名が別にある場合は適宜書き換えてください */
+  .fixed-banner nav, 
+  .fixed-banner .nav-links,
+  .fixed-banner .desktop-nav {
+    display: none !important;
+  }
+
+  /* ボタンが押されてクラスが付与されたら、アコーディオンとして展開する */
+  .fixed-banner nav.nav-mobile-open,
+  .fixed-banner .nav-links.nav-mobile-open,
+  .fixed-banner .desktop-nav.nav-mobile-open {
+    display: flex !important;
+    flex-direction: column !important;
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    width: 100% !important;
+    background: #181818 !important;
+    padding: 15px 20px !important;
+    border-bottom: 1px solid #2a2a2a !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5) !important;
+    gap: 12px !important;
+    z-index: 1000 !important;
+  }
+}
+
+/* ==========================================
+   PC表示（601px以上）のときの設定
+   ========================================== */
+@media (min-width: 601px) {
+  /* スマホ用ボタンをPCでは確実に非表示にする */
+  .safe-menu-btn {
+    display: none !important;
+  }
+}
 </style>
 </head>
 <body id="topPage">
@@ -789,6 +842,39 @@
 </div>
 
 <script>
+  document.addEventListener('DOMContentLoaded', () => {
+  // 固定バナー（ヘッダー）の要素を取得
+  const header = document.querySelector('.fixed-banner') || document.querySelector('header');
+  if (!header) return;
+
+  // まだスマホ用ボタンが存在しない場合のみ、動的に作成して追加する
+  if (!document.getElementById('safeMenuBtn')) {
+    const btn = document.createElement('button');
+    btn.id = 'safeMenuBtn';
+    btn.className = 'safe-menu-btn';
+    btn.innerHTML = 'MENU ☰';
+    header.appendChild(btn);
+
+    // 既存のリンクを包んでいるナビゲーション要素を特定
+    const navContainer = header.querySelector('nav') || header.querySelector('.nav-links') || header.querySelector('.desktop-nav');
+    
+    if (navContainer) {
+      // ボタンをクリックしたとき、開閉用クラスの付け外しを行う
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        navContainer.classList.toggle('nav-mobile-open');
+      });
+
+      // メニューが開いている時に、画面の他の場所をクリックしたら閉じる
+      document.addEventListener('click', (e) => {
+        if (!header.contains(e.target)) {
+          navContainer.classList.remove('nav-mobile-open');
+        }
+      });
+    }
+  }
+});
+
   // --- プレイヤー関連の変数 ---
   let player = null;
   let isPlayerReady = false;
