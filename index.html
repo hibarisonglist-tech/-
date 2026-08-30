@@ -663,6 +663,72 @@
     display: none !important;
   }
 }
+/* スマホ表示（600px以下）の設定 */
+@media (max-width: 600px) {
+  /* 左上のロゴやタイトルは絶対に消さないよう明示的に保持 */
+  .fixed-banner .site-title,
+  .fixed-banner img,
+  .fixed-banner h1,
+  .fixed-banner .logo {
+    display: block !important;
+  }
+
+  /* スマホ用メニューボタン（右側に配置） */
+  .fixed-mobile-btn {
+    display: block !important;
+    background: #222 !important;
+    border: 1px solid #444 !important;
+    color: #fff !important;
+    padding: 6px 12px !important;
+    border-radius: 4px !important;
+    font-size: 13px !important;
+    cursor: pointer !important;
+    margin-left: auto !important;
+  }
+
+  /* スマホではPC用の横並びリンク群のみを初期非表示にする */
+  .fixed-banner nav, 
+  .fixed-banner .desktop-nav,
+  .fixed-banner .nav-links {
+    display: none !important;
+  }
+
+  /* ボタンタップ時にアコーディオンとして展開 */
+  .fixed-banner.is-mobile-open nav, 
+  .fixed-banner.is-mobile-open .desktop-nav,
+  .fixed-banner.is-mobile-open .nav-links {
+    display: flex !important;
+    flex-direction: column !important;
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    width: 100% !important;
+    background: #181818 !important;
+    padding: 15px 20px !important;
+    border-bottom: 1px solid #2a2a2a !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5) !important;
+    gap: 12px !important;
+    z-index: 1000 !important;
+  }
+}
+
+/* PC表示（601px以上）ではスマホ用ボタンを完全に消す */
+@media (min-width: 601px) {
+  .fixed-mobile-btn {
+    display: none !important;
+  }
+}@media (max-width: 600px) {
+  /* スマホ表示時、ロゴやタイトル、画像などは絶対に隠さない */
+  .fixed-banner h1,
+  .fixed-banner img,
+  .fixed-banner .logo,
+  .fixed-banner .site-title,
+  .fixed-banner a:first-child {
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+}
 </style>
 </head>
 <body id="topPage">
@@ -843,40 +909,63 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  // 画面幅が600px以下（スマホ）のときだけ実行する
+  // 画面幅が600px以下の場合のみ実行
   if (window.innerWidth <= 600) {
-    const allElements = document.querySelectorAll('button, a, div, span');
-    
-    for (let el of allElements) {
-      if (el.textContent.includes('メニュー') || el.textContent.includes('MENU')) {
-        el.innerHTML = 'MENU ☰';
-        
-        const header = el.closest('.fixed-banner') || document.querySelector('.fixed-banner') || document.querySelector('header');
-        if (header) {
-          const navContainer = header.querySelector('nav') || header.querySelector('.nav-links') || header.querySelector('.desktop-nav') || header.querySelector('ul');
-          
-          if (navContainer) {
-            el.addEventListener('click', (e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              navContainer.classList.toggle('nav-mobile-open');
-            });
+    // ページ内のヘッダーや上部コンテナを広く探索する
+    const header = document.querySelector('header') || 
+                   document.querySelector('.fixed-banner') || 
+                   document.querySelector('#header') || 
+                   document.querySelector('[class*="header"]') || 
+                   document.querySelector('[class*="banner"]') || 
+                   document.body.firstElementChild;
+                   
+    if (!header) return;
+
+    // スマホ用「MENU ☰」ボタンを生成して追加
+    if (!document.getElementById('pureMobileMenuBtn')) {
+      const mBtn = document.createElement('button');
+      mBtn.id = 'pureMobileMenuBtn';
+      mBtn.style.cssText = 'display: block !important; background: #222 !important; border: 1px solid #444 !important; color: #fff !important; padding: 6px 12px !important; border-radius: 4px !important; font-size: 13px !important; cursor: pointer !important; margin-left: auto !important;';
+      mBtn.innerHTML = 'MENU ☰';
+      header.appendChild(mBtn);
+
+      // ヘッダー内にあるメニューのリストやナビゲーション要素を広く探索
+      const navContainer = header.querySelector('nav') || 
+                           header.querySelector('ul') || 
+                           header.querySelector('[class*="nav"]') || 
+                           header.querySelector('[class*="menu"]');
+
+      if (navContainer) {
+        // 初期状態ではリンク群を非表示にする
+        navContainer.style.display = 'none';
+
+        mBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (navContainer.style.display === 'none') {
+            navContainer.style.display = 'flex';
+            navContainer.style.flexDirection = 'column';
+            navContainer.style.position = 'absolute';
+            navContainer.style.top = '100%';
+            navContainer.style.left = '0';
+            navContainer.style.width = '100%';
+            navContainer.style.background = '#181818';
+            navContainer.style.padding = '15px 20px';
+            navContainer.style.zIndex = '1000';
+            navContainer.style.gap = '12px';
+            navContainer.style.boxShadow = '0 4px 12px rgba(0,0,0,0.5)';
+          } else {
+            navContainer.style.display = 'none';
           }
-        }
-        break;
+        });
+
+        // メニュー外をクリックしたら閉じる
+        document.addEventListener('click', (e) => {
+          if (!header.contains(e.target)) {
+            navContainer.style.display = 'none';
+          }
+        });
       }
     }
-
-    // メニューの外側をクリックしたら閉じる（スマホ時のみ）
-    document.addEventListener('click', (e) => {
-      const header = document.querySelector('.fixed-banner') || document.querySelector('header');
-      if (header) {
-        const navContainer = header.querySelector('nav') || header.querySelector('.nav-links') || header.querySelector('.desktop-nav') || header.querySelector('ul');
-        if (navContainer && !header.contains(e.target)) {
-          navContainer.classList.remove('nav-mobile-open');
-        }
-      }
-    });
   }
 });
 
