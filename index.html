@@ -842,36 +842,41 @@
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
   // 固定バナー（ヘッダー）の要素を取得
   const header = document.querySelector('.fixed-banner') || document.querySelector('header');
   if (!header) return;
 
-  // まだスマホ用ボタンが存在しない場合のみ、動的に作成して追加する
-  if (!document.getElementById('safeMenuBtn')) {
-    const btn = document.createElement('button');
+  // スマホ用ボタンの生成または取得
+  let btn = document.getElementById('safeMenuBtn');
+  if (!btn) {
+    btn = document.createElement('button');
     btn.id = 'safeMenuBtn';
     btn.className = 'safe-menu-btn';
-    btn.innerHTML = 'MENU ☰';
     header.appendChild(btn);
+  }
+  
+  // ボタンのテキストを「MENU ☰」に指定
+  btn.innerHTML = 'MENU ☰';
 
-    // 既存のリンクを包んでいるナビゲーション要素を特定
-    const navContainer = header.querySelector('nav') || header.querySelector('.nav-links') || header.querySelector('.desktop-nav');
+  // 既存のナビゲーション要素を特定
+  const navContainer = header.querySelector('nav') || header.querySelector('.nav-links') || header.querySelector('.desktop-nav');
+  
+  if (navContainer && !btn.dataset.listenerAdded) {
+    btn.dataset.listenerAdded = 'true';
     
-    if (navContainer) {
-      // ボタンをクリックしたとき、開閉用クラスの付け外しを行う
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        navContainer.classList.toggle('nav-mobile-open');
-      });
+    // ボタンをクリックしたときの開閉切り替え
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      navContainer.classList.toggle('nav-mobile-open');
+    });
 
-      // メニューが開いている時に、画面の他の場所をクリックしたら閉じる
-      document.addEventListener('click', (e) => {
-        if (!header.contains(e.target)) {
-          navContainer.classList.remove('nav-mobile-open');
-        }
-      });
-    }
+    // メニューの外側をクリックしたら閉じる
+    document.addEventListener('click', (e) => {
+      if (!header.contains(e.target)) {
+        navContainer.classList.remove('nav-mobile-open');
+      }
+    });
   }
 });
 
