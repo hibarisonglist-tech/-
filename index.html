@@ -843,46 +843,59 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  // 少しだけ遅延させて確実にDOMが読み込まれた後に実行
-  setTimeout(() => {
-    const header = document.querySelector('.fixed-banner') || document.querySelector('header');
-    if (!header) return;
+  // スマホサイズ（600px以下）の時だけ実行
+  if (window.innerWidth <= 600) {
+    setTimeout(() => {
+      const header = document.querySelector('.fixed-banner') || document.querySelector('header');
+      if (!header) return;
 
-    // 「メニュー」または「MENU」が含まれる要素、あるいはヘッダー内のボタンを探索
-    const allElements = header.querySelectorAll('button, div, span, a');
-    let targetBtn = null;
+      // 1. 元々ある「メニュー▼」などのボタンをすべて探し、画面から消す
+      const allElements = header.querySelectorAll('button, a, div, span');
+      let originalBtn = null;
 
-    for (let el of allElements) {
-      const text = el.textContent.trim();
-      if ((text.includes('メニュー') || text.includes('MENU')) && el.tagName) {
-        targetBtn = el;
-        break;
+      for (let el of allElements) {
+        const text = el.textContent.trim();
+        // 「メニュー」を含んでいて、かつ自分が作ったカスタムボタンではないもの
+        if (text.includes('メニュー') && !el.classList.contains('custom-menu-btn')) {
+          originalBtn = el;
+          el.style.display = 'none'; // 元のボタンを非表示にする
+        }
       }
-    }
 
-    // それでも見つからない場合はヘッダー内の最初のボタンを指定
-    if (!targetBtn) {
-      targetBtn = header.querySelector('button');
-    }
+      // 2. すでにカスタムボタンがない場合のみ、新しく「MENU ☰」ボタンを作成して挿入
+      let customBtn = document.getElementById('customMenuBtn');
+      if (!customBtn) {
+        customBtn = document.createElement('button');
+        customBtn.id = 'customMenuBtn';
+        customBtn.className = 'custom-menu-btn';
+        customBtn.innerHTML = 'MENU ☰';
+        
+        // デザインの適用
+        customBtn.style.background = '#222';
+        customBtn.style.border = '1px solid #444';
+        customBtn.style.color = '#fff';
+        customBtn.style.padding = '6px 14px';
+        customBtn.style.borderRadius = '20px';
+        customBtn.style.cursor = 'pointer';
+        customBtn.style.fontSize = '0.85rem';
+        customBtn.style.marginLeft = 'auto';
+        customBtn.style.display = 'block';
 
-    if (targetBtn) {
-      // テキストとデザインを強制的に変更
-      targetBtn.innerHTML = 'MENU ☰';
-      targetBtn.style.background = '#222';
-      targetBtn.style.border = '1px solid #444';
-      targetBtn.style.color = '#fff';
-      targetBtn.style.padding = '6px 14px';
-      targetBtn.style.borderRadius = '20px';
-      targetBtn.style.cursor = 'pointer';
-      targetBtn.style.fontSize = '0.85rem';
+        // 元のボタンがあった場所、またはヘッダー内に配置
+        if (originalBtn && originalBtn.parentNode) {
+          originalBtn.parentNode.insertBefore(customBtn, originalBtn);
+        } else {
+          header.appendChild(customBtn);
+        }
+      }
 
-      // 既存のナビゲーション要素を特定して開閉イベントを連動
+      // 3. ナビゲーション要素の特定と開閉イベントの連動
       const navContainer = header.querySelector('nav') || header.querySelector('.nav-links') || header.querySelector('.desktop-nav') || header.querySelector('ul');
       
-      if (navContainer && !targetBtn.dataset.listenerAdded) {
-        targetBtn.dataset.listenerAdded = 'true';
+      if (navContainer && !customBtn.dataset.listenerAdded) {
+        customBtn.dataset.listenerAdded = 'true';
         
-        targetBtn.addEventListener('click', (e) => {
+        customBtn.addEventListener('click', (e) => {
           e.stopPropagation();
           navContainer.classList.toggle('nav-mobile-open');
         });
@@ -894,8 +907,8 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         });
       }
-    }
-  }, 100);
+    }, 150);
+  }
 });
 
   // --- プレイヤー関連の変数 ---
