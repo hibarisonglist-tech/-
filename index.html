@@ -339,7 +339,7 @@
       max-width: 300px;
       color: #fff;
       position: relative;
-      border: 1px solid var(--pink-border);
+border-color: var(--singer-border-color, inherit) !important;
     }
     .singer-modal-close {
       position: absolute;
@@ -665,6 +665,9 @@
   cursor: pointer;
   flex-shrink: 0;
 }
+.singer-modal-list .singer-icon,
+    #singer-modal-list .singer-icon {
+    }
 </style>
 </head>
 <body id="topPage">
@@ -685,8 +688,7 @@
   </div>
 
   <!-- スマホ用メニューボタン ＆ プルダウンメニュー -->
-  <button class="mobile-menu-btn" onclick="toggleMobileMenu(event)">
-    メニュー ▼
+ <button class="mobile-menu-btn" onclick="toggleMobileMenu(event)">MENU≡</button>
   </button>
   <div class="mobile-dropdown-menu" id="mobileDropdownMenu">
     <a href="#musicLibraryHeading" onclick="closeMobileMenu()">✦ MUSIC LIBRARY</a>
@@ -851,6 +853,7 @@
 const artistAliases = {
   "mrs. green apple": ["ミセス", "mrs.green apple", "ミセスグリーンアップル"],
   "one ok rock": ["ワンオク"],
+  "L'Arc〜en〜Ciel": ["ラルク", "L'Arc〜en〜Ciel", "ラルクアンシエル"],
   // 追加例: "正式なアーティスト名": ["別名1", "別名2", ...]
 };
 function normalizeText(str) {
@@ -1343,7 +1346,6 @@ function matchSubFilter(song, subFilter = selectedSubFilter) {
               clone.style.width = '34px';
               clone.style.height = '34px';
               clone.style.margin = '0';
-              clone.style.border = '';
               modalList.appendChild(clone);
             });
             modal.style.display = 'flex';
