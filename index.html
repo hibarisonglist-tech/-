@@ -79,7 +79,7 @@
     .animated-main-logo {
       width: 100%;
       height: 360px;
-      background-image: url('imagesmainlogo.png');
+      background-image: url('images/mainlogo.png');
       background-size: contain;
       background-position: center;
       background-repeat: no-repeat;
@@ -228,7 +228,6 @@
       user-select: none;
       -webkit-user-drag: none;
     }
-    .group-icon { border-radius: 50%; }
 
     .tags-container {
       display: flex;
@@ -246,7 +245,6 @@
       border-radius: 9999px;
       display: inline-block;
     }
-    .tag-badge { font-size: 0.65rem; background: var(--primary-pink); color: #fff; padding: 2px 8px; border-radius: 10px; cursor: pointer; }
    
     .yt-btn {
       margin-top: 10px;
@@ -384,7 +382,6 @@
         background-position: center !important;
       }
 
-      /* ①スマホ用固定バナーを縦に広く調整 */
       .top-fixed-bar {
         padding: 8px 14px;
         height: 64px;
@@ -396,57 +393,57 @@
         white-space: nowrap;
       }
 
-/* スマホ用メニューボタンのスタイル */
-  .mobile-menu-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(230, 57, 115, 0.2);
-    border: 1px solid var(--primary-pink, #ff69b4);
-    color: #fff;
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    cursor: pointer;
-    font-family: var(--font-family);
-  }
+      /* スマホ用メニューボタンのスタイル */
+      .mobile-menu-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(230, 57, 115, 0.2);
+        border: 1px solid var(--primary-pink, #ff69b4);
+        color: #fff;
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        cursor: pointer;
+        font-family: var(--font-family);
+      }
 
-  /* アコーディオン式メニューのスタイル */
-  .mobile-dropdown-menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    right: 15px;
-    background: #1e1e2f;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-    padding: 12px;
-    flex-direction: column;
-    gap: 10px;
-    z-index: 1000;
-    min-width: 200px;
-  }
-  .mobile-dropdown-menu.is-open {
-    display: flex;
-  }
-  .mobile-dropdown-menu a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 0.9rem;
-    padding: 8px 10px;
-    text-align: left;
-    background: transparent;
-    border: none;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    border-radius: 6px;
-    transition: background 0.2s;
-  }
-  .mobile-dropdown-menu a:hover {
-    background: rgba(230, 57, 115, 0.2);
-  }
+      /* アコーディオン式メニューのスタイル */
+      .mobile-dropdown-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 15px;
+        background: #1e1e2f;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        padding: 12px;
+        flex-direction: column;
+        gap: 10px;
+        z-index: 1000;
+        min-width: 200px;
+      }
+      .mobile-dropdown-menu.is-open {
+        display: flex;
+      }
+      .mobile-dropdown-menu a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 0.9rem;
+        padding: 8px 10px;
+        text-align: left;
+        background: transparent;
+        border: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border-radius: 6px;
+        transition: background 0.2s;
+      }
+      .mobile-dropdown-menu a:hover {
+        background: rgba(230, 57, 115, 0.2);
+      }
       .mobile-dropdown-menu .nav-icon {
         width: 20px;
         height: 20px;
@@ -454,9 +451,9 @@
       }
 
       /* PC用の通常ナビゲーションはスマホでは非表示 */
-.desktop-nav-links {
-    display: none !important;
-  }
+      .desktop-nav-links {
+        display: none !important;
+      }
 
       .song-title, 
       .song-artist {
@@ -604,131 +601,12 @@
       .yt-container { bottom: 170px; right: 10px; width: 150px; height: 85px; }
     }
 
-    /* PC版ではスマホ用メニューボタンを非表示にする */
+    /* PC表示（601px以上）のときの設定 */
     @media (min-width: 601px) {
       .mobile-menu-btn, .mobile-dropdown-menu {
         display: none !important;
       }
     }
-    /* ==========================================
-   スマホ表示（600px以下）のアコーディオン設定
-   ========================================== */
-@media (max-width: 600px) {
-  /* 動的に生成されるスマホ用ボタンのデザイン */
-  .safe-menu-btn {
-    background: #222 !important;
-    border: 1px solid #444 !important;
-    color: #fff !important;
-    padding: 6px 12px !important;
-    border-radius: 4px !important;
-    font-size: 13px !important;
-    cursor: pointer !important;
-    display: block !important;
-    margin-left: auto;
-  }
-
-  /* 既存のナビゲーションやリンク群を、初期状態では非表示（収納）にする */
-  /* ※もしスマホで隠したい要素のクラス名が別にある場合は適宜書き換えてください */
-  .fixed-banner nav, 
-  .fixed-banner .nav-links,
-  .fixed-banner .desktop-nav {
-    display: none !important;
-  }
-
-  /* ボタンが押されてクラスが付与されたら、アコーディオンとして展開する */
-  .fixed-banner nav.nav-mobile-open,
-  .fixed-banner .nav-links.nav-mobile-open,
-  .fixed-banner .desktop-nav.nav-mobile-open {
-    display: flex !important;
-    flex-direction: column !important;
-    position: absolute !important;
-    top: 100% !important;
-    left: 0 !important;
-    width: 100% !important;
-    background: #181818 !important;
-    padding: 15px 20px !important;
-    border-bottom: 1px solid #2a2a2a !important;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.5) !important;
-    gap: 12px !important;
-    z-index: 1000 !important;
-  }
-}
-
-/* ==========================================
-   PC表示（601px以上）のときの設定
-   ========================================== */
-@media (min-width: 601px) {
-  /* スマホ用ボタンをPCでは確実に非表示にする */
-  .safe-menu-btn {
-    display: none !important;
-  }
-}
-/* スマホ表示（600px以下）の設定 */
-@media (max-width: 600px) {
-  /* 左上のロゴやタイトルは絶対に消さないよう明示的に保持 */
-  .fixed-banner .site-title,
-  .fixed-banner img,
-  .fixed-banner h1,
-  .fixed-banner .logo {
-    display: block !important;
-  }
-
-  /* スマホ用メニューボタン（右側に配置） */
-  .fixed-mobile-btn {
-    display: block !important;
-    background: #222 !important;
-    border: 1px solid #444 !important;
-    color: #fff !important;
-    padding: 6px 12px !important;
-    border-radius: 4px !important;
-    font-size: 13px !important;
-    cursor: pointer !important;
-    margin-left: auto !important;
-  }
-
-  /* スマホではPC用の横並びリンク群のみを初期非表示にする */
-  .fixed-banner nav, 
-  .fixed-banner .desktop-nav,
-  .fixed-banner .nav-links {
-    display: none !important;
-  }
-
-  /* ボタンタップ時にアコーディオンとして展開 */
-  .fixed-banner.is-mobile-open nav, 
-  .fixed-banner.is-mobile-open .desktop-nav,
-  .fixed-banner.is-mobile-open .nav-links {
-    display: flex !important;
-    flex-direction: column !important;
-    position: absolute !important;
-    top: 100% !important;
-    left: 0 !important;
-    width: 100% !important;
-    background: #181818 !important;
-    padding: 15px 20px !important;
-    border-bottom: 1px solid #2a2a2a !important;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.5) !important;
-    gap: 12px !important;
-    z-index: 1000 !important;
-  }
-}
-
-/* PC表示（601px以上）ではスマホ用ボタンを完全に消す */
-@media (min-width: 601px) {
-  .fixed-mobile-btn {
-    display: none !important;
-  }
-}@media (max-width: 600px) {
-  /* スマホ表示時、ロゴやタイトル、画像などは絶対に隠さない */
-  .fixed-banner h1,
-  .fixed-banner img,
-  .fixed-banner .logo,
-  .fixed-banner .site-title,
-  .fixed-banner a:first-child {
-    display: inline-block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-}
 </style>
 </head>
 <body id="topPage">
@@ -811,6 +689,7 @@
         <button class="sub-filter-btn" data-sub="再生リスト未収録" onclick="toggleSubFilter('再生リスト未収録')">再生リスト未収録 <span class="count">(0)</span></button>
       </div>
     </div>
+    
 
     <div class="fav-notice" id="favNotice">
       <div style="margin-bottom: 10px; text-align: center;">
@@ -859,6 +738,7 @@
     <p class="about-note">※掲載楽曲は、公式動画・公式チャンネルへのリンクをご案内しています。</p>
     <p class="about-note">※掲載コンテンツの無断転載・二次利用はご遠慮ください。</p>
   </div>
+</div>
 
 <div class="yt-container" id="ytContainer">
   <div id="ytplayer"></div>
@@ -908,40 +788,6 @@
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const applyMenuFix = () => {
-    if (window.innerWidth > 600) return;
-
-    const banner = document.querySelector('.fixed-banner') || document.querySelector('header');
-    if (!banner) return;
-
-    // 余計な重複ボタンを排除
-    document.querySelectorAll('#pureMobileMenuBtn, .custom-menu-btn').forEach(el => el.remove());
-
-    // ヘッダー内の「メニュー」を含む要素を確実に捉えて書き換える
-    const elements = banner.querySelectorAll('button, a, div, span');
-    for (let el of elements) {
-      if (el.textContent.includes('メニュー')) {
-        el.innerHTML = 'MENU ☰';
-        
-        const nav = banner.querySelector('nav') || banner.querySelector('.nav-links') || banner.querySelector('ul');
-        if (nav && !el.dataset.bound) {
-          el.dataset.bound = 'true';
-          el.style.cursor = 'pointer';
-          el.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            nav.classList.toggle('nav-mobile-open');
-          });
-        }
-        break;
-      }
-    }
-  };
-
-  applyMenuFix();
-  setTimeout(applyMenuFix, 400); // 読み込み遅延対策
-});
   // --- プレイヤー関連の変数 ---
   let player = null;
   let isPlayerReady = false;
@@ -1626,8 +1472,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --- モバイル用メニュー制御 ---
-  function toggleMobileMenu(e) {
-    if (e) e.stopPropagation();
+  function toggleMobileMenu(event) {
+    if (event) event.stopPropagation();
     const menu = document.getElementById('mobileDropdownMenu');
     if (menu) {
       menu.classList.toggle('is-open');
@@ -1668,33 +1514,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
-  // スマホ用メニューの開閉切り替え
-function toggleMobileMenu(event) {
-  event.stopPropagation(); // イベントのバブリングを防止
-  const menu = document.getElementById('mobileDropdownMenu');
-  if (menu) {
-    menu.classList.toggle('is-open');
-  }
-}
-
-// メニュー内のリンクをクリックした時に閉じる
-function closeMobileMenu() {
-  const menu = document.getElementById('mobileDropdownMenu');
-  if (menu) {
-    menu.classList.remove('is-open');
-  }
-}
-
-// メニューが開いている時に、メニューの外側をクリックしたら閉じる
-document.addEventListener('click', (event) => {
-  const menu = document.getElementById('mobileDropdownMenu');
-  const btn = document.querySelector('.mobile-menu-btn');
-  if (menu && menu.classList.contains('is-open')) {
-    if (!menu.contains(event.target) && (!btn || !btn.contains(event.target))) {
-      menu.classList.remove('is-open');
-    }
-  }
-});
 </script>
 </body>
 </html>
