@@ -4,23 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Studio Hibari - UNOFFICIAL FAN SITE</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
   <script src="https://www.youtube.com/iframe_api"></script>
   <script src="songs.js"></script>
 
 <style>
-    :root {
+:root {
       --bg-color: #121a24;
       --card-bg: #192332;
       --primary-pink: #CD3764;
       --pink-border: rgba(205, 55, 100, 0.6);
       --text-white: #e2e8f0;
       --text-muted: #a0aec0;
-      --font-family: 'Shippori Mincho', serif;
+      --font-family: 'Space Grotesk', 'Noto Sans JP', sans-serif;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
@@ -39,6 +39,7 @@
       z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.5);
     }
     .top-brand {
+      font-family: 'Space Grotesk', sans-serif;
       font-size: 0.95rem; font-style: italic; font-weight: bold; color: #fff;
       text-decoration: none; display: inline-flex; align-items: center; justify-content: center;
       background: linear-gradient(135deg, transparent 15%, var(--primary-pink) 15%, var(--primary-pink) 85%, transparent 85%);
@@ -49,7 +50,7 @@
    
     .nav-link {
       background: none; border: none; color: var(--text-white);
-      font-family: var(--font-family); font-size: 0.85rem; cursor: pointer;
+      font-family: 'Space Grotesk', 'Noto Sans JP', sans-serif; font-size: 0.85rem; cursor: pointer;
       text-decoration: none; display: inline-flex; align-items: center; gap: 4px;
       transition: color 0.2s; padding: 6px 10px; border-radius: 8px;
       white-space: nowrap;
@@ -146,11 +147,11 @@
    
     .filter-label { font-size: 0.75rem; color: #ff758c; letter-spacing: 1px; margin-bottom: 4px; font-weight: bold; }
    
-    .categories { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+.categories { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
     .category-btn {
       background: rgba(230, 57, 115, 0.15); border: 1px solid var(--pink-border);
       color: var(--text-white); padding: 5px 12px; border-radius: 16px;
-      cursor: pointer; font-family: var(--font-family); font-size: 0.8rem;
+      cursor: pointer; font-family: 'Noto Sans JP', sans-serif; font-size: 0.8rem;
       transition: 0.2s; user-select: none; white-space: nowrap;
     }
     .category-btn.active { background: var(--primary-pink); box-shadow: 0 0 8px rgba(230, 57, 115, 0.5); }
@@ -158,7 +159,7 @@
     .sub-filter-btn {
       background: rgba(74, 85, 104, 0.3); border: 1px solid rgba(160, 174, 192, 0.4);
       color: var(--text-white); padding: 5px 12px; border-radius: 16px;
-      cursor: pointer; font-family: var(--font-family); font-size: 0.8rem;
+      cursor: pointer; font-family: 'Noto Sans JP', sans-serif; font-size: 0.8rem;
       transition: 0.2s; user-select: none; white-space: nowrap;
     }
     .sub-filter-btn.active { background: #4a5568; border-color: #cbd5e0; box-shadow: 0 0 8px rgba(203, 213, 224, 0.4); }
@@ -848,15 +849,16 @@ border-color: var(--singer-border-color, inherit) !important;
 </div>
 
 <script>
-  // --- アーティストの表記揺れ・エイリアス設定 ---
-// 「songs.js」のように、必要に応じて自由に追加・編集できます。
-const artistAliases = {
-  "mrs. green apple": ["ミセス", "mrs.green apple", "ミセスグリーンアップル"],
-  "one ok rock": ["ワンオク"],
-  "L'Arc〜en〜Ciel": ["ラルク", "L'Arc〜en〜Ciel", "ラルクアンシエル"],
-  // 追加例: "正式なアーティスト名": ["別名1", "別名2", ...]
-};
-function normalizeText(str) {
+// --- アーティストの表記揺れ・エイリアス設定 ---
+  const artistAliases = {
+    "mrs. green apple": ["ミセス", "mrs.green apple", "ミセスグリーンアップル"],
+    "one ok rock": ["ワンオク"],
+    "L'Arc〜en〜Ciel": ["ラルク", "L'Arc〜en〜Ciel", "ラルクアンシエル"],
+    // 追加例: "正式なアーティスト名": ["別名1", "別名2", ...]
+  };
+
+  // 文字列の正規化（大文字小文字、全角半角、スペース・記号の吸収）を1つに統合
+  function normalizeText(str) {
     if (!str) return "";
     return str
       .toLowerCase()
@@ -879,7 +881,6 @@ function normalizeText(str) {
     }
     return keywords;
   }
-  // ...（この下に既存の let player = null; などのコードが続きます）
 
 // 文字列の正規化（大文字小文字、全角半角、スペース・記号の吸収）
 function normalizeText(str) {
@@ -890,7 +891,7 @@ function normalizeText(str) {
     .replace(/[\s ]/g, "")
     .replace(/[・ー－‐]/g, "");
 }
-  // --- プレイヤー関連の変数 ---
+// --- プレイヤー関連の変数 ---
   let player = null;
   let isPlayerReady = false;
   let playQueue = [];
@@ -923,7 +924,7 @@ function normalizeText(str) {
       document.getElementById('sortSelect').value = savedSort;
     }
 
-    document.querySelectorAll('.category-btn').forEach(btn => {
+document.querySelectorAll('.category-btn').forEach(btn => {
       btn.classList.toggle('active', btn.getAttribute('data-tag') === selectedCategory);
     });
     document.querySelectorAll('.sub-filter-btn').forEach(btn => {
@@ -972,7 +973,7 @@ function normalizeText(str) {
     let icon = '';
     let color = '';
 
-    if (typeof group === 'object' && group !== null) {
+if (typeof group === 'object' && group !== null) {
       name = group.name || '';
       icon = group.icon || group.image || group.avatar || '';
       color = group.color || group.colorCode || '';
@@ -994,14 +995,10 @@ function normalizeText(str) {
         break;
       }
     }
-
-    if (!icon && name) {
-      icon = `images/groups/${name}.png`;
-    }
-
+    
     return { name, icon, color };
   }
-
+  
   function getVideoId(url) {
     if (!url) return null;
     let videoId = null;

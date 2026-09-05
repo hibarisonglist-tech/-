@@ -30,7 +30,7 @@ const singerData = {
   },
    "Nox": { 
     icon: "https://pbs.twimg.com/profile_images/1510130887702290433/CwOS0Tr1_400x400.jpg", 
-    color: "#192332" 
+    color: "#41877F" 
     },
    "阿萨（アザ）": { 
     icon: "https://pbs.twimg.com/profile_images/1716029682188185600/_ZlCXXiS_400x400.jpg", 
@@ -114,7 +114,7 @@ const singerData = {
   },
   "ましろ爻": { 
     icon:"https://pbs.twimg.com/profile_images/1544254778678865920/4aqMJzdr_400x400.jpg", 
-    color: "#1E2232" 
+    color:"#1E2232" 
   },
   "樋口楓": { 
     icon: "https://pbs.twimg.com/profile_images/1756331331351666688/KOnQTFEf_400x400.jpg", 
@@ -678,7 +678,7 @@ const songs = [
     title: "セカイ",
     artist: "DECO*27×堀江晶太(kemu) ",
     date: "2024-06-09",
-    singers: ["渡会雲雀","戌亥とこ","ナラ・ハラマウン","レザ・アファンルナ","Nox","阿萨（アザ）","Nox","セフィナ","ミン・スゥーハ","ペトラ グリン","闇ノシュウ"],
+    singers: ["渡会雲雀","戌亥とこ","ナラ・ハラマウン","レザ・アファンルナ","Nox","阿萨（アザ）","セフィナ","ミン・スゥーハ","ペトラ グリン","闇ノシュウ"],
     tags: ["歌ってみた","コラボ"],
     youtube: "https://youtu.be/a8Wqhz0ElD8?si=aNUFze3KBrmUdtoB"
   },
@@ -1009,7 +1009,7 @@ const songs = [
   {
     id: 55,
     title: "君に届け",
-    artist: " flumpool",
+    artist: "flumpool",
     date: "2023-09-23",
     singers: ["渡会雲雀"],
     tags: ["歌枠"],
